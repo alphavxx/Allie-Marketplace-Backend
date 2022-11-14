@@ -1,0 +1,65 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='shortcut icon' href='./img/square.svg' type='image/x-icon')
+  link(rel='stylesheet' href='./css/index.css')
+  title Allie eve knox
+
+include _navBar.pug
+
+section.hero
+  .hero__col-1
+    div
+      h1.hero__heading.ma--bottom This is Allie eve knox.
+      h3.hero__sub-heading.text--h2.ma--bottom
+        | This is my own marketplace where you can buy NFT to view my content
+        | on go with NFT.
+      .ma--top-side
+        a(href='#collection')
+          button.btn.btn--1x.text-base--1.hero__btn Unlock Your Content
+  .col
+    img.hero__image(src='./img/hero-image.webp' alt='Hero Image')
+section.section-how-it-works.section.text--center
+  .container
+    h2.text--h2.ma--bottom How it works
+    h1.HIW.text--h1
+      | Mint, Watch and Sell.
+  .container.flex
+    div
+      img.HIW__img(src='./img/square.svg' alt='')
+      h3.HIW__text Buy NFT
+    div
+      img.HIW__img(src='./img/square.svg' alt='')
+      h3.HIW__text Unlock Content
+    div
+      img.HIW__img(src='./img/square.svg' alt='')
+      h3.HIW__text Watch
+    div
+      img.HIW__img(src='./img/square.svg' alt='')
+      h3.HIW__text Resell NFT
+
+
+section.section.section-collection.ma--bottom-lg
+  a(name='collection')
+  h2.section__title.text--h1.ma--bottom Collections
+
+  each collection in collections
+    .collection
+      // Left side
+      .collection__left
+        .right
+          img.collection__nft.ma--bottom(src='./img/sample-img.jpeg' alt='NFT image')
+          h2.collection__name.ma--bottom= collection.name
+          p.collection__description.ma--bottom.text-base--1= collection.description
+          span.collection__price.text--h2= collection.price
+        .left
+          a.btn.collection__btn(href=`/${collection.slug}`) Unlock Collection
+      // right side
+      .collection__right
+        img.collection__img(src='./img/sample-img.jpeg' alt='sample collection images')
+        img.collection__img(src='./img/sample-img.jpeg' alt='sample collection images')
+        img.collection__img(src='./img/sample-img.jpeg' alt='sample collection images')
+
+include _footer.pug

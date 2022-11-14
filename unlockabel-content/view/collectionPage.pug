@@ -1,0 +1,18 @@
+extends base.pug
+
+block content
+    header.header
+        div
+            img.collection__nft(src='./img/sample-img.jpeg' alt='NFT image')
+        .header__right
+            h2.collection__name.ma--bottom= collection.name
+            p.collection__description.ma--bottom.text-base--1= collection.description
+            span.collection__price.text--h2= collection.price
+    section.section.section-media
+        .media
+            .media__box
+                img(src='./img/sample-img.jpeg' alt='media images')
+            .media__box
+                img(src='./img/sample-img.jpeg' alt='media images')
+            .media__box
+                img(src='./img/sample-img.jpeg' alt='media images')
