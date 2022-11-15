@@ -9,7 +9,22 @@ exports.homePage = catchAsync(async (req, res, next) => {
   res.status(200).render("home", { collections });
 });
 
-exports.getCollection = catchAsync(async (req, res, next) => {
+exports.getCollectionPage = catchAsync(async (req, res, next) => {
+
+  const collection = await data.collections.filter(obj => {
+    return obj.slug === slug
+  });
+
+  if (!collection) {
+    return next(
+      new AppError("No collection found with that collection Name", 404)
+    );
+  }
+
+  res.status(200).render("collectionPage", { collection });
+});
+
+exports.mePage =  catchAsync(async (req, res, next) => {
   const slug = req.params.slug;
 
   const collection = await data.collections[1];
