@@ -23,7 +23,8 @@ exports.collections = [
     name: "Fun in Space",
     description: "this is a collection of videos of me having fun in space.",
     price: "89",
-    nftImage: "./img/nftimage",
+    metadata_id: "unlockableteststore.mintspace2.testnet:758fd182d078f6cad1d2780eb06b5d26",
+    nftImage: "https://testnet.mintbase.io/_next/image?url=https%3A%2F%2Fimage-cache-service-z3w7d7dnea-ew.a.run.app%2Fmedia%3Furl%3Dhttps%3A%2F%2Farweave.net%2FQvcZde-LqPD6RVhXtEkqvXqbPqXZgZHu82LX6O9eJiM&w=1920&q=75",
     files: [
         "./img/image-1",
         "./img/image-1",
@@ -42,7 +43,7 @@ exports.collections = [
     name: "Cigarette Party",
     description: "It is a NFT to unlock my content which i smoke cigarette.",
     price: "16",
-    nftImage: "./img/nftimage",
+    nftImage: "./img/nftimagehttps://testnet.mintbase.io/_next/image?url=https%3A%2F%2Fimage-cache-service-z3w7d7dnea-ew.a.run.app%2Fmedia%3Furl%3Dhttps%3A%2F%2Farweave.net%2FDEPqzvxgxlSlNMrK7Vy1FrdbhHFjLFw-qanObTBXQBI&w=1920&q=75",
     files: [
         "./img/image-1",
         "./img/image-1",
