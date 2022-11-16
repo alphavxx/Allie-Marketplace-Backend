@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const slugify = require("slugify");
 
 const collectionSchema = new mongoose.Schema({
   name: {
@@ -8,13 +7,10 @@ const collectionSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
-  slug: {
-    type: String,
-  },
   description: {
     type: String,
   },
-  nftID: {
+  metadata_id: {
     type: String,
     required: [
       true,
@@ -30,12 +26,7 @@ const collectionSchema = new mongoose.Schema({
   media: [String],
 });
 
-collectionSchema.index({ slug: 1 });
-
-collectionSchema.pre("save", function (next) {
-  this.slug = slugify(this.name, { lower: true });
-  next();
-});
+collectionSchema.index({ metadata_id: 1 });
 
 const Collection = mongoose.model("Collection", collectionSchema);
 

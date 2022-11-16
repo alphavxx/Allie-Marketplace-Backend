@@ -20,7 +20,7 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // For view
-app.use('/', viewRouter);
+// app.use('/', viewRouter);
 
 // For API
 app.use('/api/collection', collectionRouter);

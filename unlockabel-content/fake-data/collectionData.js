@@ -20,10 +20,9 @@ exports.collections = [
     ],
   },
   {
-    name: "test name",
-    description: "test description",
-    price: "23",
-    slug: "nude-arts-paint",
+    name: "Fun in Space",
+    description: "this is a collection of videos of me having fun in space.",
+    price: "89",
     nftImage: "./img/nftimage",
     files: [
         "./img/image-1",
@@ -40,10 +39,9 @@ exports.collections = [
       ],
   },
   {
-    name: "test name",
-    description: "test description",
-    price: "22",
-    slug: "nude-arts-paint",
+    name: "Cigarette Party",
+    description: "It is a NFT to unlock my content which i smoke cigarette.",
+    price: "16",
     nftImage: "./img/nftimage",
     files: [
         "./img/image-1",
