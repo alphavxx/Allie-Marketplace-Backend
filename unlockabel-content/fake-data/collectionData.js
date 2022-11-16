@@ -43,6 +43,7 @@ exports.collections = [
     name: "Cigarette Party",
     description: "It is a NFT to unlock my content which i smoke cigarette.",
     price: "16",
+    metadata_id: "unlockableteststore.mintspace2.testnet:45fdad09c0c2e848c682c8f31973e6ef",
     nftImage: "./img/nftimagehttps://testnet.mintbase.io/_next/image?url=https%3A%2F%2Fimage-cache-service-z3w7d7dnea-ew.a.run.app%2Fmedia%3Furl%3Dhttps%3A%2F%2Farweave.net%2FDEPqzvxgxlSlNMrK7Vy1FrdbhHFjLFw-qanObTBXQBI&w=1920&q=75",
     files: [
         "./img/image-1",
