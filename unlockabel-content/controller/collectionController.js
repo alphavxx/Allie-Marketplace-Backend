@@ -5,7 +5,10 @@ const data = require("./../fake-data/collectionData");
 
 exports.getCollections = catchAsync(async (req, res, next) => {
 
-  const collection = await data.collections;
+  const collection = await data.collections.map(function(item) { 
+    delete item.files; 
+    return item; 
+});
 
   res.status(200).json({
     status: 'success',
