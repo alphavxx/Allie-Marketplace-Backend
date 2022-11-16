@@ -33,8 +33,8 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (verfiy) {
     // GRANT ACCESS TO THE PROTECTED ROUTE
     req.user = signerRes.accountId;
-
     next();
+
   } else {
     return next(new AppError("UnAuthenticated ", 403));
   }

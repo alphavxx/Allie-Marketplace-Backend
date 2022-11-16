@@ -3,27 +3,21 @@ const catchAsync = require('../utils/catchAsync.js');
 // Fake Data
 const data = require("./../fake-data/collectionData");
 
-exports.getCollections = catchAsync(async (req, res, next) => {
-
-  const collection = await data.collections.map(function(item) { 
-    delete item.files; 
-    return item; 
-});
-
-  res.status(200).json({
-    status: 'success',
-    collection,
-  });
-});
 
 
 exports.getCollection = catchAsync(async (req, res, next) => {
 
   const metadata_id = req.params.metadata_id;
 
+  console.log(metadata_id);
+
   const collection = await data.collections.filter(obj => {
     return obj.metadata_id === metadata_id
   });
+
+  console.log('raw : ' , data.collections);
+  console.log('singel : ' , collection);
+
 
   if (!collection) {
     return next(
@@ -36,6 +30,19 @@ exports.getCollection = catchAsync(async (req, res, next) => {
     collection,
   });
 
+});
+
+exports.getCollections = catchAsync(async (req, res, next) => {
+
+  const collection = await data.collections.map(function(item) { 
+    delete item.files; 
+    return item; 
+});
+
+  res.status(200).json({
+    status: 'success',
+    collection,
+  });
 });
 
 
