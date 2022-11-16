@@ -34,10 +34,7 @@ exports.getCollection = catchAsync(async (req, res, next) => {
 
 exports.getCollections = catchAsync(async (req, res, next) => {
 
-  const collection = await data.collections.map(function(item) { 
-    delete item.files; 
-    return item; 
-});
+  const collection = await data.collections;
 
   res.status(200).json({
     status: 'success',
