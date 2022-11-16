@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", viewController.homePage);
 //return collection page
-router.post("/collection/",viewController.getCollectionPage);
+router.get("/collection/", authController.protect, authController.isNFTOwned, viewController.getCollectionPage);
 
 
 

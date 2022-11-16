@@ -4,7 +4,7 @@ const collectionController = require("../controller/collectionController.js");
 // const fileUpload = require("../utils/fileUpload.js");
 const router = express.Router();
 
-router.get("/", collectionController.getCollection);
+router.get("/", collectionController.getCollections);
 
 router.post("/:metadata_id", authController.protect, authController.isNFTOwned , collectionController.getCollection);
 

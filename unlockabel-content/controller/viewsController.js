@@ -11,9 +11,11 @@ exports.homePage = catchAsync(async (req, res, next) => {
 
 exports.getCollectionPage = catchAsync(async (req, res, next) => {
 
-  const collection = await data.collections.filter(obj => {
-    return obj.slug === slug
-  });
+  // const collection = await data.collections.filter(obj => {
+  //   return obj.slug === slug
+  // });
+
+  const collection = await data.collections[1];
 
   if (!collection) {
     return next(

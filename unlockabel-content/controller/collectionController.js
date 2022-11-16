@@ -3,6 +3,16 @@ const catchAsync = require('../utils/catchAsync.js');
 // Fake Data
 const data = require("./../fake-data/collectionData");
 
+exports.getCollections = catchAsync(async (req, res, next) => {
+
+  const collection = await data.collections;
+
+  res.status(200).json({
+    status: 'success',
+    collection,
+  });
+});
+
 
 exports.getCollection = catchAsync(async (req, res, next) => {
 
