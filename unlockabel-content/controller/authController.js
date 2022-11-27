@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
 const { Wallet, Chain, Network } = require("mintbase");
-const axios = require("axios");
 
 const catchAsync = require("./../utils/catchAsync.js");
 const AppError = require("./../utils/appError.js");
@@ -34,7 +33,14 @@ exports.protect = catchAsync(async (req, res, next) => {
     // GRANT ACCESS TO THE PROTECTED ROUTE
     req.user = signerRes.accountId;
     next();
+  } else {
+    return next(new AppError("UnAuthenticated ", 403));
+  }
+});
 
+exports.isAdmin = catchAsync(async (req, res, next) => {
+  if (process.env.OWNER_WALLET === req.user) {
+    next();
   } else {
     return next(new AppError("UnAuthenticated ", 403));
   }
@@ -79,7 +85,7 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
   }
 
   const { errors, data } = await fetchCheckNFT();
-  
+
   let pass;
 
   if (data.mb_views_nft_tokens[0]) {
