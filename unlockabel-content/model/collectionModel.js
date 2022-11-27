@@ -23,12 +23,7 @@ const collectionSchema = new mongoose.Schema({
     type: Number,
     required: [true, "A collection must have a price"],
   },
-  files: [
-    {
-      imgData: Buffer,
-      contentType: String,
-    },
-  ],
+  files: [String],
   nftImage: {
     type: String,
     required: [true, "Please provide NFT Image Link"],

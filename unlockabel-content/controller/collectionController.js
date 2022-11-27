@@ -1,5 +1,3 @@
-const fs = require("fs");
-const path = require("path");
 const sharp = require("sharp");
 const { uuid } = require("uuidv4");
 const catchAsync = require("../utils/catchAsync.js");
@@ -54,15 +52,7 @@ exports.createCollection = catchAsync(async (req, res, next) => {
 
   if (req.files) {
     await req.files.files.forEach((el) => {
-      req.body.files.push({
-        imgData: fs.readFileSync(
-          path.join(
-            __dirname,
-            `./../public/img/collection-image/${el.filename}`
-          )
-        ),
-        contentType: "image/jpeg",
-      });
+      req.body.files.push(`/img/collection-image/${el.filename}`);
     });
   }
 
