@@ -5,25 +5,33 @@ const fileUpload = require("../utils/fileUpload.js");
 const router = express.Router();
 
 // To display the all collections without the content files
-router.get("/", collectionController.getCollections);
+// router.get("/", collectionController.getCollections);
 
-// to get the single collections (used post here to the data to verify the user owns that NFT or not)
-router.post(
-  "/:metadata_id",
-  authController.protect,
-  authController.isNFTOwned,
-  collectionController.getCollection
-);
+// // to get the single collections (used post here to the data to verify the user owns that NFT or not)
+// router.post(
+//   "/:metadata_id",
+//   authController.protect,
+//   authController.isNFTOwned,
+//   collectionController.getCollection
+// );
+
+// router.post(
+//   "/addCollection",
+//   authController.protect,
+//   authController.isAdmin,
+//   fileUpload.uploadFiles,
+//   collectionController.formatImages,
+//   collectionController.createCollection
+// );
 
 router.post(
   "/addCollection",
-  authController.protect,
-  authController.isAdmin,
-  fileUpload.uploadFile,
+  fileUpload.uploadFiles,
+  collectionController.formatImages,
   collectionController.createCollection
 );
 
-// router.delete("/deleteCollection", authController.protect, authController.isAdmin, collectionController.deleteCollection);
+router.delete("/deleteCollection", collectionController.deleteCollection);
 
 // router.patch(
 //   "/:id",
