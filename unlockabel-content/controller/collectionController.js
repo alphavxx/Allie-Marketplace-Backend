@@ -4,8 +4,10 @@ const catchAsync = require("../utils/catchAsync.js");
 const Collection = require("./../model/collectionModel");
 
 exports.formatImages = catchAsync(async (req, res, next) => {
-  if (!req.files) return next();
+  console.log(req.files);
 
+  if (!req.files) return next();
+  console.log("pass 2");
   await req.files.files.forEach(async (el) => {
     el.filename = `collection-${uuid()}.jpeg`;
     await sharp(el.buffer)
@@ -17,6 +19,27 @@ exports.formatImages = catchAsync(async (req, res, next) => {
   setTimeout(() => {
     next();
   }, 2000);
+});
+
+exports.createCollection = catchAsync(async (req, res, next) => {
+  // this collection only needds to be created by process.env.OWNER_WALLET (if  Allie then her wallet ID)
+
+  req.body.files = [];
+
+  if (req.files) {
+    await req.files.files.forEach((el) => {
+      req.body.files.push(`/img/collection-image/${el.filename}`);
+    });
+  }
+  console.log("pass 3");
+
+  const collection = await Collection.create(req.body);
+  console.log("pass 4");
+
+  res.status(201).json({
+    status: "success",
+    collection,
+  });
 });
 
 exports.getCollection = catchAsync(async (req, res, next) => {
@@ -45,24 +68,7 @@ exports.getCollections = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createCollection = catchAsync(async (req, res, next) => {
-  // this collection only needds to be created by process.env.OWNER_WALLET (if  Allie then her wallet ID)
 
-  req.body.files = [];
-
-  if (req.files) {
-    await req.files.files.forEach((el) => {
-      req.body.files.push(`/img/collection-image/${el.filename}`);
-    });
-  }
-
-  const collection = await Collection.create(req.body);
-
-  res.status(201).json({
-    status: "success",
-    collection,
-  });
-});
 
 exports.deleteCollection = catchAsync(async (req, res, next) => {
   const metadata_id = req.body.metadata_id;

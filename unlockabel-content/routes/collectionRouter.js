@@ -4,6 +4,14 @@ const collectionController = require("../controller/collectionController.js");
 const fileUpload = require("../utils/fileUpload.js");
 const router = express.Router();
 
+router.post(
+  "/addCollection",
+  authController.protect,
+  authController.isAdmin,
+  fileUpload.uploadFiles,
+  collectionController.formatImages,
+  collectionController.createCollection
+);
 // To display the all collections without the content files
 router.get("/", collectionController.getCollections);
 
@@ -15,14 +23,7 @@ router.post(
   collectionController.getCollection
 );
 
-router.post(
-  "/addCollection",
-  authController.protect,
-  authController.isAdmin,
-  fileUpload.uploadFiles,
-  collectionController.formatImages,
-  collectionController.createCollection
-);
+
 
 router.delete("/deleteCollection", authController.protect, authController.isAdmin, collectionController.deleteCollection);
 
