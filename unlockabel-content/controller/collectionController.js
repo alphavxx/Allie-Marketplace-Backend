@@ -1,6 +1,7 @@
 const sharp = require("sharp");
 const { uuid } = require("uuidv4");
 const catchAsync = require("../utils/catchAsync.js");
+const AppError = require("./../utils/appError.js");
 const Collection = require("./../model/collectionModel");
 
 exports.formatImages = catchAsync(async (req, res, next) => {
@@ -98,13 +99,17 @@ exports.editCollection = catchAsync(async (req, res, next) => {
 exports.deleteCollection = catchAsync(async (req, res, next) => {
   const metadata_id = req.params.metadata_id;
 
-  const collection = await Collection.deleteOne({ metadata_id });
+  const isCollection = await Collection.findOne({ metadata_id });
 
-  if (!collection) {
-    return next(new AppError("No collection found with that ID", 404));
+  if (!isCollection) {
+    return next(new AppError("No document found with that ID", 404));
   }
+
+  const collection = await Collection.deleteOne({ metadata_id });
 
   res.status(204).json({
     status: "success",
+    msg: "Collection Deleted",
+    collection
   });
 });
