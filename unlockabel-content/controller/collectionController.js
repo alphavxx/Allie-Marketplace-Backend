@@ -66,7 +66,6 @@ exports.getCollections = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.editCollection = catchAsync(async (req, res, next) => {
   // This controller only needs to edit the files not any other data
   // Bcoz the other data all from the NFT itself
@@ -82,18 +81,19 @@ exports.editCollection = catchAsync(async (req, res, next) => {
   const collection = await Collection.find({ metadata_id });
 
   if (!collection) {
-    return next(new AppError('No document found with that ID', 404));
+    return next(new AppError("No document found with that ID", 404));
   }
 
-  const updatedCollection = await Collection.findOneAndUpdate(req.params.id, req.body);
+  const updatedCollection = await Collection.findOneAndUpdate(
+    req.params.id,
+    req.body
+  );
 
   res.status(201).json({
-    status: 'success',
+    status: "success",
     updatedCollection,
   });
 });
-
-
 
 exports.deleteCollection = catchAsync(async (req, res, next) => {
   const metadata_id = req.params.metadata_id;

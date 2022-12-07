@@ -4,9 +4,6 @@ const collectionController = require("../controller/collectionController.js");
 const fileUpload = require("../utils/fileUpload.js");
 const router = express.Router();
 
-// To display the all collections without the content files
-router.get("/", collectionController.getCollections);
-
 // for API (Have to remove later)
 router.post(
   "/addCollection",
@@ -18,6 +15,9 @@ router.post(
 router.delete("/deleteCollection", collectionController.deleteCollection);
 
 // For APP
+
+// To display the all collections without the content files
+router.get("/", collectionController.getCollections);
 
 // to get the single collections (used post here to the data to verify the user owns that NFT or not)
 router.post(
@@ -42,7 +42,7 @@ router.patch(
   "/:metadata_id",
   authController.protect,
   authController.isAdmin,
-  fileUpload.uploadFile,
+  fileUpload.uploadFiles,
   collectionController.editCollection
 );
 
