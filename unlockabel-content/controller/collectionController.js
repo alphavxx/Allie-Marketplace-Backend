@@ -31,10 +31,8 @@ exports.createCollection = catchAsync(async (req, res, next) => {
       req.body.files.push(`/img/collection-image/${el.filename}`);
     });
   }
-  console.log("pass 3");
 
   const collection = await Collection.create(req.body);
-  console.log("pass 4");
 
   res.status(201).json({
     status: "success",
@@ -45,7 +43,7 @@ exports.createCollection = catchAsync(async (req, res, next) => {
 exports.getCollection = catchAsync(async (req, res, next) => {
   const metadata_id = req.params.metadata_id;
 
-  const collection = await await Collection.find({ metadata_id });
+  const collection = await await Collection.findOne({ metadata_id });
 
   if (!collection) {
     return next(
@@ -69,9 +67,36 @@ exports.getCollections = catchAsync(async (req, res, next) => {
 });
 
 
+exports.editCollection = catchAsync(async (req, res, next) => {
+  // This controller only needs to edit the files not any other data
+  // Bcoz the other data all from the NFT itself
+
+  req.body.files = [];
+
+  if (req.files) {
+    await req.files.files.forEach((el) => {
+      req.body.files.push(`/img/collection-image/${el.filename}`);
+    });
+  }
+
+  const collection = await Collection.find({ metadata_id });
+
+  if (!collection) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  const updatedCollection = await Collection.findOneAndUpdate(req.params.id, req.body);
+
+  res.status(201).json({
+    status: 'success',
+    updatedCollection,
+  });
+});
+
+
 
 exports.deleteCollection = catchAsync(async (req, res, next) => {
-  const metadata_id = req.body.metadata_id;
+  const metadata_id = req.params.metadata_id;
 
   const collection = await Collection.deleteOne({ metadata_id });
 
