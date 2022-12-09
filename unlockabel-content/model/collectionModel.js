@@ -4,7 +4,6 @@ const collectionSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please provide collection name"],
-    unique: true,
     trim: true,
   },
   description: {

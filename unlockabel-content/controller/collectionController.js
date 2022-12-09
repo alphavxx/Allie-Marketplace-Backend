@@ -5,10 +5,11 @@ const AppError = require("./../utils/appError.js");
 const Collection = require("./../model/collectionModel");
 
 exports.formatImages = catchAsync(async (req, res, next) => {
-  console.log(req.files);
 
   if (!req.files) return next();
-  console.log("pass 2");
+
+  console.log(req.files);
+
   await req.files.files.forEach(async (el) => {
     el.filename = `collection-${uuid()}.jpeg`;
     await sharp(el.buffer)
@@ -44,12 +45,12 @@ exports.createCollection = catchAsync(async (req, res, next) => {
 exports.getCollection = catchAsync(async (req, res, next) => {
   const metadata_id = req.params.metadata_id;
 
-  const collection = await await Collection.findOne({ metadata_id });
+  console.log(metadata_id);
+
+  const collection = await Collection.find({ metadata_id });
 
   if (!collection) {
-    return next(
-      new AppError("No collection found with that collection Name", 404)
-    );
+    return next(new AppError("No collection found with that MetaData ID", 404));
   }
 
   res.status(200).json({
@@ -110,6 +111,6 @@ exports.deleteCollection = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: "success",
     msg: "Collection Deleted",
-    collection
+    collection,
   });
 });
