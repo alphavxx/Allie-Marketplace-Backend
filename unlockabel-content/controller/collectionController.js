@@ -45,9 +45,7 @@ exports.createCollection = catchAsync(async (req, res, next) => {
 exports.getCollection = catchAsync(async (req, res, next) => {
   const metadata_id = req.params.metadata_id;
 
-  console.log(metadata_id);
-
-  const collection = await Collection.find({ metadata_id });
+  const collection = await Collection.findOne({ metadata_id });
 
   if (!collection) {
     return next(new AppError("No collection found with that MetaData ID", 404));

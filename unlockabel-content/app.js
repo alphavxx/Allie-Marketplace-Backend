@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const compression = require("compression");
 
-const viewRouter = require("./routes/viewRouter");
 const collectionRouter = require("./routes/collectionRouter");
 
 const AppError = require("./utils/appError.js");

@@ -29,14 +29,6 @@ const router = express.Router();
 // To display the all collections without the content files
 router.get("/", collectionController.getCollections);
 
-// to get the single collections (used post here to the data to verify the user owns that NFT or not)
-router.post(
-  "/:metadata_id",
-  authController.protect,
-  authController.isNFTOwned,
-  collectionController.getCollection
-);
-
 // For Admin Access
 router.post(
   "/addCollection",
@@ -46,6 +38,16 @@ router.post(
   collectionController.formatImages,
   collectionController.createCollection
 );
+
+// to get the single collections (used post here to the data to verify the user owns that NFT or not)
+router.post(
+  "/:metadata_id",
+  authController.protect,
+  authController.isNFTOwned,
+  collectionController.getCollection
+);
+
+
 
 // PATCH to edit the collection
 router.patch(
