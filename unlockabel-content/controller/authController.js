@@ -42,7 +42,7 @@ exports.isAdmin = catchAsync(async (req, res, next) => {
   if (process.env.OWNER_WALLET === req.user) {
     next();
   } else {
-    return next(new AppError("UnAuthenticated ", 403));
+    return next(new AppError("UnAuthenticated Signer Failed", 403));
   }
 });
 
@@ -98,11 +98,10 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
     pass = false;
   }
 
-  if (errors || !pass) {
+  if (errors && !pass) {
     console.error("ERROR : ", errors);
-    return next(new AppError("UnAuthenticated ", 403));
+    return next(new AppError("UnAuthenticated You are not an Admin.", 403));
   }
-
   // if there is data that means the owner owns that NFT
   if (pass) {
     next();

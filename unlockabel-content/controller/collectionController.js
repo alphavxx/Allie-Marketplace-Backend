@@ -6,6 +6,9 @@ const Collection = require("./../model/collectionModel");
 
 exports.formatImages = catchAsync(async (req, res, next) => {
 
+  console.log(" REQUEST FROM FRONT_END : " , res);
+  console.log("============================================================== /n REQUEST FROM FRONT_END FILE: /n ====================================================" , res.file);
+
   if (!req.files) return next();
 
   console.log(req.files);
