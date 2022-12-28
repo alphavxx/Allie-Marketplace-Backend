@@ -17,12 +17,17 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   const { wallet } = walletData;
+  let signerRes;
 
-  const signerRes = req.body.signerRes.data;
+  if (typeof req.body.signerRes === "string") {
+    signerRes = JSON.parse(req.body.signerRes).data;
+  } else {
+    signerRes = req.body.signerRes.data;
+  }
 
   const message = "test-message";
 
-  const verfiy = wallet.verifySignature({
+  const verfiy = await wallet.verifySignature({
     accountId: signerRes.accountId,
     message: message,
     publicKey: signerRes.publicKey,
@@ -32,6 +37,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (verfiy) {
     // GRANT ACCESS TO THE PROTECTED ROUTE
     req.user = signerRes.accountId;
+
     next();
   } else {
     return next(new AppError("UnAuthenticated ", 403));

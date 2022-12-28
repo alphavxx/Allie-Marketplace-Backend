@@ -32,9 +32,9 @@ router.get("/", collectionController.getCollections);
 // For Admin Access
 router.post(
   "/addCollection",
+  fileUpload.uploadFiles,
   authController.protect,
   authController.isAdmin,
-  fileUpload.uploadFiles,
   collectionController.formatImages,
   collectionController.createCollection
 );
@@ -46,8 +46,6 @@ router.post(
   authController.isNFTOwned,
   collectionController.getCollection
 );
-
-
 
 // PATCH to edit the collection
 router.patch(
