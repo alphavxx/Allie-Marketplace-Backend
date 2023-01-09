@@ -18,12 +18,12 @@ dotenv.config();
 
 const app = express();
 
+app.use(cors())
+
 // For frontend file serving
 app.set("view engine", "pug");
 app.set("views", "./view");
 app.use(express.static("./public"));
-
-app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
