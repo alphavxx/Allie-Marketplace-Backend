@@ -36,6 +36,10 @@ app.use(compression());
 // For API
 app.use("/api/collection", collectionRouter);
 
+app.get("/", (req, res) => {
+  res.send("Success");
+});
+
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
