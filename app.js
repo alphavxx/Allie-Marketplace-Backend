@@ -21,7 +21,6 @@ const app = express();
 app.use(cors())
 
 // For frontend file serving
-app.set("view engine", "pug");
 app.set("views", "./view");
 app.use(express.static("./public"));
 
@@ -30,8 +29,6 @@ app.use(express.urlencoded({ extended: true }));
 // to compress the res size to the user
 app.use(compression());
 
-// For view
-// app.use('/', viewRouter);
 
 // For API
 app.use("/api/collection", collectionRouter);
