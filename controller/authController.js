@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const { Wallet, Chain, Network } = require("mintbase");
 
 const catchAsync = require("./../utils/catchAsync.js");
 const AppError = require("./../utils/appError.js");
@@ -24,6 +23,9 @@ exports.isAdmin = catchAsync(async (req, res, next) => {
 });
 
 exports.isNFTOwned = catchAsync(async (req, res, next) => {
+  const walletAddress = req.user;
+  const metadata_id = req.body.metadata_id;
+
   const operations = (walletAddress_, metadata_id_) => {
     return `
     query checkNFT {
@@ -53,19 +55,11 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
     return await result.json();
   }
 
-  const walletAddress = req.user;
-
-  const metadata_id = req.body.metadata_id;
-
-  console.log("WalletAddress : ", walletAddress, metadata_id);
-
   function fetchCheckNFT() {
     return fetchGraphQL(operations(walletAddress, metadata_id), "checkNFT", {});
   }
 
   const { errors, data } = await fetchCheckNFT();
-
-  console.log(data);
 
   let pass;
 
