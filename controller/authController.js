@@ -75,9 +75,9 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
 
   console.log("DATA : ", data.mb_views_nft_tokens[0]);
 
-  if (errors && !pass) {
+  if (errors || !pass) {
     console.error("ERROR : ", errors);
-    return next(new AppError("UnAuthenticated You are not an Admin.", 403));
+    return next(new AppError("UnAuthenticated. Sorry You Have Not Own This Collection NFT.", 403));
   }
   // if there is data that means the owner owns that NFT
   if (pass) {
