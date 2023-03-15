@@ -56,7 +56,7 @@ exports.getCollection = catchAsync(async (req, res, next) => {
 });
 
 exports.getCollections = catchAsync(async (req, res, next) => {
-  const collection = await await Collection.find();
+  const collection = await Collection.find();
 
   res.status(200).json({
     status: "success",
