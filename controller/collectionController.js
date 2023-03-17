@@ -4,33 +4,23 @@ const catchAsync = require("../utils/catchAsync.js");
 const AppError = require("./../utils/appError.js");
 const Collection = require("./../model/collectionModel");
 
-exports.formatImages = catchAsync(async (req, res, next) => {
+// exports.formatImages = catchAsync(async (req, res, next) => {
+//   if (!req.files) return next();
 
-  if (!req.files) return next();
+//   await req.files.files.forEach(async (el) => {
+//     el.filename = `collection-${uuid()}.jpeg`;
+//     await sharp(el.buffer)
+//       .jpeg()
+//       .toFile(`public/img/collection-image/${el.filename}`);
+//   });
 
-  await req.files.files.forEach(async (el) => {
-    el.filename = `collection-${uuid()}.jpeg`;
-    await sharp(el.buffer)
-      .jpeg()
-      .toFile(`public/img/collection-image/${el.filename}`);
-  });
-
-  // this setTimeout function to make sure that all file is saved completely
-  setTimeout(() => {
-    next();
-  }, 2000);
-});
+//   // this setTimeout function to make sure that all file is saved completely
+//   setTimeout(() => {
+//     next();
+//   }, 2000);
+// });
 
 exports.createCollection = catchAsync(async (req, res, next) => {
-  // this collection only needds to be created by process.env.OWNER_WALLET (if  Allie then her wallet ID)
-
-  req.body.files = [];
-
-  if (req.files) {
-    await req.files.files.forEach((el) => {
-      req.body.files.push(`/img/collection-image/${el.filename}`);
-    });
-  }
 
   const collection = await Collection.create(req.body);
 

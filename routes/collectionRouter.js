@@ -1,7 +1,7 @@
 const express = require("express");
 const authController = require("../controller/authController.js");
 const collectionController = require("../controller/collectionController.js");
-const fileUpload = require("../utils/fileUpload.js");
+// const fileUpload = require("../utils/fileUpload.js");
 const router = express.Router();
 // For APP
 
@@ -11,10 +11,8 @@ router.get("/", collectionController.getCollections);
 // For Admin Access
 router.post(
   "/addCollection",
-  fileUpload.uploadFiles,
   authController.connectedAccount,
   authController.isAdmin,
-  collectionController.formatImages,
   collectionController.createCollection
 );
 
@@ -31,7 +29,7 @@ router.patch(
   "/:metadata_id",
   authController.connectedAccount,
   authController.isAdmin,
-  fileUpload.uploadFiles,
+  // fileUpload.uploadFiles,
   collectionController.editCollection
 );
 

@@ -5,7 +5,6 @@ const AppError = require("./../utils/appError.js");
 
 exports.connectedAccount = catchAsync(async (req, res, next) => {
   // Check the connected wallet User
-  console.log(req.body);
   if (req.body.connectedAccount) {
     req.user = req.body.connectedAccount;
     next();
@@ -77,7 +76,12 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
 
   if (errors || !pass) {
     console.error("ERROR : ", errors);
-    return next(new AppError("UnAuthenticated. Sorry You Have Not Own This Collection NFT.", 403));
+    return next(
+      new AppError(
+        "UnAuthenticated. Sorry You Have Not Own This Collection NFT.",
+        403
+      )
+    );
   }
   // if there is data that means the owner owns that NFT
   if (pass) {
