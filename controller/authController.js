@@ -72,8 +72,6 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
     pass = false;
   }
 
-  console.log("DATA : ", data.mb_views_nft_tokens[0]);
-
   if (errors || !pass) {
     console.error("ERROR : ", errors);
     return next(

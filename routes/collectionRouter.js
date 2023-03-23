@@ -1,7 +1,6 @@
 const express = require("express");
 const authController = require("../controller/authController.js");
 const collectionController = require("../controller/collectionController.js");
-// const fileUpload = require("../utils/fileUpload.js");
 const router = express.Router();
 // For APP
 
@@ -29,7 +28,6 @@ router.patch(
   "/:metadata_id",
   authController.connectedAccount,
   authController.isAdmin,
-  // fileUpload.uploadFiles,
   collectionController.editCollection
 );
 
